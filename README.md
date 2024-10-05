@@ -21,7 +21,7 @@ This is a Django-based web application. The project is still under development a
 
 1. Clone the repository
    ```bash
-   git clone <https://github.com/GigaDarchia/DjangoProject.git>
+   git clone https://github.com/GigaDarchia/DjangoProject.git
    ```
 2. Install the dependencies
    ```bash
