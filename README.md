@@ -2,18 +2,25 @@
 
 This is a Django-based web application. The project is still under development and consists of multiple apps.
 
+## Pre-configured Superuser:
+
+- Username: `Giga`
+- Password: `pass123!`
+
 ## Project Structure
 
 - `djangoproject/`
   - `settings.py` - Contains the settings for the Django project.
   - `urls.py` - Contains the URL declarations for the Django project.
   - `views.py` - Contains the views for the Django project.
+  - `media` - Directory that contains project media files
   
 - `order/`
   - `urls.py` - Contains the URL declarations for the order app.
   - `views.py` - Contains the views for the order app.
   
 - `store/`
+  - `models.py` - Contains 
   - `urls.py` - Contains the URL declarations for the store app.
   - `views.py` - Contains the views for the store app.
 
