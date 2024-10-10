@@ -20,7 +20,7 @@ This is a Django-based web application. The project is still under development a
   - `views.py` - Contains the views for the order app.
   
 - `store/`
-  - `models.py` - Contains 
+  - `models.py` - Contains the models for the store app.
   - `urls.py` - Contains the URL declarations for the store app.
   - `views.py` - Contains the views for the store app.
 
