@@ -1,87 +1,37 @@
-from django.http import HttpResponse, JsonResponse
+from django.http import JsonResponse
+from django.shortcuts import render
 from .models import Product, Category
-def store(request):
-    html = """
-    <!DOCTYPE html>
-    <html lang="en">
-      <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <style>
-            nav li {
-            display: inline-block;
-            text-decoration: none;
-            padding: 10px;
-            margin: 20px;
-        }
-        nav h1 {
-            display: inline-block;
-            margin: 0;
-            color: #23bf11;
-        }
-        nav ul {
-            display: inline-block;
-            padding: 0;
-            margin: 0;
-            list-style: none;
-        }
-        nav a {
-        text-decoration: none;
-        color: black;
-        transition-duration: .5s;
-        }
-        nav a:hover {
-            color: #23bf11;
-        }
-        nav a:clicked {
-            color: #2be715;
-        }
-        .cart {
-            background-color: #23bf11;
-            color: white;
-            transition-duration: .5s;
-            border: 1px black solid;
-            padding: 10px;
-            border-radius: 5px;
-        }
-        .cart:hover {
-            background-color: #2be715;
-        }
-        main a {
-            text-decoration: none;
-            color: black;
-        }
-        </style>
-        <title>Store</title>
-      </head>
-      <body>
-        <header>
-          <nav>
-            <h1>Django Project</h1>
-            <ul>
-              <li><a href="/">Home</a></li>
-              <li><a href="/store/">Store</a></li>
-              <li><a href="/order/">Order</a></li>
-            </ul>
-          </nav>
-        </header>
-        <main>
-            <p>This is the store page.</p>
-            <div class="products">
-                <p>Product 1</p>
-                <button class="cart"><a href="/store/product">Add to cart</a></button>
-                <button class="cart"><a href="/store/categories">Show categories</a></button>
-                <button class="cart"><a href="/store/products">Show products</a></button>
-            </div>
-        </main>
-      </body>
-    </html>
-        """
-    return HttpResponse(html)
-def product(request):
-    return HttpResponse("Added to cart successfully.")
+from django.db.models import Max, Min, Avg, Sum
 
-def categories(request):
+def store(request):
+    return render(request, 'store/store.html')
+
+def category(request):
+    category_list = Category.objects.filter(parent=None)
+    return render(request, 'store/category.html', {"categories": category_list})
+
+def products(request, category_id):
+
+    category = Category.objects.get(id=category_id)
+    subcategories = category.get_subcategories()
+    categories = [category]+subcategories
+
+    products = Product.objects.filter(category__in=categories).prefetch_related('category')
+
+    statistics = products.aggregate(
+        max_price=Max('price'),
+        min_price=Min('price'),
+        avg_price=Avg('price'),
+        total_cost = Sum('price')*Sum('quantity')
+    )
+
+    return render(request, 'store/products.html', context={"products": products,
+                                                           "statistics": statistics})
+
+def product(request, product_id):
+    return render(request, "store/product.html", context={"product": Product.objects.get(id=product_id)})
+
+def categories_json(request):
     category_list = []
 
     for category in Category.objects.all():
@@ -97,7 +47,7 @@ def categories(request):
 
     return JsonResponse(category_list, safe=False)
 
-def products(request):
+def products_json(request):
     product_list = []
 
     for product in Product.objects.all():
@@ -112,9 +62,11 @@ def products(request):
             'id': product.id,
             'name': product.title,
             'price': product.price,
+            'quantity': product.quantity,
             'image': product.img.name if product.img else None,
             "description": product.desc if product.desc else None,
             'categories': category_list if product.category.count() > 0 else None
         })
 
     return JsonResponse(product_list, safe=False)
+

@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+      <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="{% static '/store/styles/categories/styles.css' %}">
+          <title>Store</title>
+      </head>
+      <body>
+        <header>
+          <nav>
+            <h1>Django Project</h1>
+            <ul>
+              <li><a href="/">Home</a></li>
+              <li><a href="/store/">Store</a></li>
+              <li><a href="/order/">Order</a></li>
+            </ul>
+          </nav>
+        </header>
+        <main>
+            <div class="categories">
+            {% for category in categories %}
+                <div class="card">
+                    <div class="card__img">
+                        <a href="{% url 'category_products' category_id=category.id%}"><img src="{{ category.img.url }}" alt="Category Image"></a>
+                    </div>
+                    <div class="card__text">
+                        <h3>{{ category.name }}</h3>
+                    </div>
+                </div>
+            {% endfor %}
+            </div>
+        </main>
+      </body>
+    </html>
