@@ -26,7 +26,8 @@ def products(request, category_id):
     )
 
     return render(request, 'store/products.html', context={"products": products,
-                                                           "statistics": statistics})
+                                                           "statistics": statistics,
+                                                           "category": category})
 
 def product(request, product_id):
     return render(request, "store/product.html", context={"product": Product.objects.get(id=product_id)})

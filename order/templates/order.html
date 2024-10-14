@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} Order {% endblock %}
+
+{% block extra_css %} <link rel="stylesheet" href="{% static 'styles/styles.css' %}"> {% endblock %}
+
+{% block content %}
+    <p>This is the order page.</p>
+    <button id="complete"><a href="/order/complete">Complete the order</a></button>
+{% endblock %}

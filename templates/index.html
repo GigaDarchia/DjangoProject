@@ -1,25 +1,9 @@
+{% extends 'base.html' %}
+
 {% load static %}
-<!DOCTYPE html>
-    <html lang="en">
-      <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="{% static 'styles/styles.css' %}" />
-        <title>Home</title>
-      </head>
-      <body>
-        <header>
-          <nav>
-            <h1>Django Project</h1>
-            <ul>
-              <li><a href="/">Home</a></li>
-              <li><a href="/store/">Store</a></li>
-              <li><a href="/order/">Order</a></li>
-            </ul>
-          </nav>
-        </header>
-        <main>
-            <p>This is the home page.</p>
-        </main>
-      </body>
-    </html>
+
+{% block title %} Home {% endblock %}
+
+{% block content %}
+    <p style="margin: 10px 12px">This is the home page.</p>
+{% endblock %}

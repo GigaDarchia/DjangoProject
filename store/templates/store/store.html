@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}Store{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'store/styles/styles.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="store__buttons">
+        <button class="cart"><a href="/store/category">Show Categories</a></button>
+        <button class="cart"><a href="/store/categories">Categories JSON</a></button>
+        <button class="cart"><a href="/store/products">Products JSON</a></button>
+    </div>
+{% endblock %}
