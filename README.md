@@ -4,6 +4,7 @@ This is a Django-based web application. The project is still under development a
 
 ## Pre-configured Superuser:
 
+- Email: `test@admin.com`
 - Username: `Giga`
 - Password: `pass123!`
 
@@ -16,13 +17,19 @@ This is a Django-based web application. The project is still under development a
   - `media` - Directory that contains project media files
   
 - `order/`
+  - `models.py` - Contains the cart model.
   - `urls.py` - Contains the URL declarations for the order app.
   - `views.py` - Contains the views for the order app.
+  - `signals.py` - Contains the signal that assigns a newly registered user a cart.
   
 - `store/`
   - `models.py` - Contains the models for the store app.
   - `urls.py` - Contains the URL declarations for the store app.
   - `views.py` - Contains the views for the store app.
+
+- `user_app`
+  - `models.py` - Contains the custom user model.
+
 
 ## Setup
 
