@@ -16,7 +16,7 @@ def products(request, category_id):
     subcategories = category.get_subcategories()
     categories = [category]+subcategories
 
-    products = Product.objects.filter(category__in=categories).prefetch_related('category')
+    products = Product.objects.filter(category__in=categories).prefetch_related('category').distinct()
 
     statistics = products.aggregate(
         max_price=Max('price'),

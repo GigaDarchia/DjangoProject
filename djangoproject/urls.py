@@ -30,4 +30,5 @@ urlpatterns = [
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-admin.site.site_header = "Django Administration"
+admin.site.site_header = "E-Commerce Website Admin Page"
+admin.site.index_title = "E-Commerce Website Admin"

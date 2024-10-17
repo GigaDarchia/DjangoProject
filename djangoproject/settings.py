@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     "debug_toolbar",
     'store.apps.StoreConfig',
-    'order.apps.OrderConfig'
+    'order.apps.OrderConfig',
+    'user_app'
 ]
 
 MIDDLEWARE = [
@@ -139,4 +140,5 @@ INTERNAL_IPS = [
     '127.0.0.1',
 ]
 
+AUTH_USER_MODEL = 'user_app.User'
 
